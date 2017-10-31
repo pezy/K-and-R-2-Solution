@@ -1,44 +1,38 @@
 #include <stdio.h>
 
 /* print a histogram of the frequencies of different characters in its input. */
+/* The visualize character is 33~126(94), check http://www.asciitable.com/ */
 
-#define MAX_LENGTH	256
-#define IN			1		/* inside a word */
-#define OUT			0		/* outside a word */
+#define VC_NUM  94
 
 main()
 {
-	int frequancies[MAX_LENGTH];
-	int c, i, j, state, length, maxcount, maxlength;
+    int frequancies[VC_NUM];
+    int c, i, j, max;
 
-	state = OUT;
-	length = maxlength = -1;
-	maxcount = 0;
-	for (i = 0; i < MAX_LENGTH; ++i) lengths[i] = 0;
+	max = 0;
+	for (i = 0; i < VC_NUM; ++i) frequancies[i] = 0;
 
-	/* collection */
-	while ((c = getchar()) != EOF) {
-		if (c == ' ' || c == '\t' || c == '\n') {
-			if (state == IN) {
-				if (length > maxlength) maxlength = length;
-				++lengths[length];
-				if (lengths[length] > maxcount) maxcount = lengths[length];
-			}
-			state = OUT;
-			length = -1;
-		}
-		else {
-			state = IN;
-			++length;
-		}
-	}
+    while ((c = getchar()) != EOF) {
+		if (c < 33 || 126 < c) continue;
+		
+		++frequancies[c - 33];
+		if (max < frequancies[c - 33]) max = frequancies[c - 33];
+    }
 
 	/* drawing */
-	for (j = maxcount; j > 0; --j) {
-		for (i = 0; i <= maxlength; ++i) {
-			if (lengths[i] < j) putchar(' ');
-			else putchar('#');
+	for (i = max; i > 0; --i) {
+		printf("%4d|", i);
+		for (j = 0; j < VC_NUM; ++j) {
+			if (frequancies[j] >= i) putchar('#');
+			else putchar(' ');
 		}
 		putchar('\n');
 	}
+
+	printf("    +");
+	for (j = 0; j < VC_NUM; ++j) putchar('-');
+	printf("\n     ");
+	for (j = 0; j < VC_NUM; ++j) putchar('!' + j);
+	putchar('\n');
 }
