@@ -1,0 +1,21 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build exercise",
+            "type": "shell",
+            "command": "gcc",
+            "args": [
+                "-g",
+                "-std=c89",
+                "exercise_1_16_longest_lines.c"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
