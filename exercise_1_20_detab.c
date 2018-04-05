@@ -14,7 +14,8 @@
 int Getline(char line[], int lim);
 void detab(char from[], char to[]);
 
-main() {
+main()
+{
   int len;
   char inLine[MAXLINE];
   char outLine[MAXLINE];
@@ -25,10 +26,10 @@ main() {
   }
 }
 
-int Getline(char s[], int lim) {
+int Getline(char s[], int lim)
+{
   int c, i;
-  for (i = 0; i < lim - 1 && (c = getchar()) != EOF && c != '\n'; ++i)
-    s[i] = c;
+  for (i = 0; i < lim - 1 && (c = getchar()) != EOF && c != '\n'; ++i) s[i] = c;
   if (c == '\n') {
     s[i] = c;
     ++i;
@@ -37,14 +38,14 @@ int Getline(char s[], int lim) {
   return i;
 }
 
-void detab(char from[], char to[]) {
+void detab(char from[], char to[])
+{
   int i, j, n;
 
   i = j = n = 0;
   while ((to[j] = from[i]) != '\0') {
     if ('\t' == to[j])
-      for (n = 0; n < TABWIDTH; ++n, ++j)
-        to[j] = ' ';
+      for (n = 0; n < TABWIDTH; ++n, ++j) to[j] = ' ';
     else
       ++j;
     ++i;
